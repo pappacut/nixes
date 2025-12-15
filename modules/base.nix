@@ -13,31 +13,26 @@
   # ---------------------------------------------------------
   # Boot & Kernel
   # ---------------------------------------------------------
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 10;
-    };
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 10;
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.kernelParams = [
-    "zswap.enabled=1"
-    "zswap.compressor=zstd"
-    "zswap.max_pool_percent=20"
-    "zswap.shrinker_enabled=1"
-  ];
-
   system.nixos-init.enable = true;
 
   # ---------------------------------------------------------
-  # Hardware & Firmware
+  # Memory Management
   # ---------------------------------------------------------
-  # Essential for modern hardware support (Wifi, etc.)
-  hardware.enableRedistributableFirmware = true;
+  zramSwap.enable = true;
 
+  # ---------------------------------------------------------
+  # Hardware, Firmware & Graphics
+  # ---------------------------------------------------------
+  hardware.enableRedistributableFirmware = true;
   hardware.graphics.enable = true;
 
   # ---------------------------------------------------------
@@ -45,7 +40,11 @@
   # ---------------------------------------------------------
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
-  console.keyMap = "de-latin1-nodeadkeys";
+
+  console = {
+    keyMap = "de-latin1-nodeadkeys";
+    font = "Lat2-Terminus16";
+  };
 
   # ---------------------------------------------------------
   # System Features

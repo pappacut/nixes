@@ -47,10 +47,6 @@
                       mountpoint = "/var";
                       mountOptions = [ "compress=zstd" ];
                     };
-                    "/@swap" = {
-                      mountpoint = "/.swapvol";
-                      swap.swapfile.size = "2G";
-                    };
                     "/@snapshots" = { };
                   };
                 };
