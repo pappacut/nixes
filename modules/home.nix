@@ -135,10 +135,14 @@
 
     # System Monitoring
     btop
+    htop
+    iotop
+    nmon
 
     # Miscellaneous
     git
     nixfmt-rfc-style
+    code2prompt
 
     # Gnome Extensions
     gnomeExtensions.launch-new-instance
@@ -149,7 +153,7 @@
   home.sessionVariables = {
     EDITOR = "micro";
     # Point nh to your flake location so it works automatically
-    FLAKE = "/etc/nixos";
+    NH_FLAKE = "/etc/nixos";
     NIXOS_OZONE_WL = "1";
   };
 
@@ -180,6 +184,20 @@
     history = {
       size = 100000;
       path = "$HOME/.zsh_history";
+    };
+  };
+
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    hashKnownHosts = false;
+
+    matchBlocks = {
+      "*" = {
+        controlMaster = "auto";
+        controlPath = "~/.ssh/control-master-%r@%h:%p";
+        controlPersist = "30";
+      };
     };
   };
 
