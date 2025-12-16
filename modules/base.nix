@@ -27,6 +27,8 @@
   boot.initrd.systemd.enable = true;
   system.etc.overlay.enable = true;
 
+  boot.tmp.useTmpfs = true;
+
   # ---------------------------------------------------------
   # Memory Management
   # ---------------------------------------------------------
