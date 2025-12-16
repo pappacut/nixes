@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 {
   home.stateVersion = "25.11";
 
@@ -10,21 +15,19 @@
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       clock-show-weekday = true;
+      clock-show-seconds = true;
       show-battery-percentage = true;
       enable-hot-corners = false;
-    };
-
-    # Peripherals: Touchpad
-    "org/gnome/desktop/peripherals/touchpad" = {
-      tap-to-click = true;
-      two-finger-scrolling-enabled = true;
-      natural-scroll = true;
+      font-name = "Noto Sans 11";
+      monospace-font-name = "Noto Sans Mono 11";
     };
 
     # Window Management
     "org/gnome/mutter" = {
       center-new-windows = true;
       dynamic-workspaces = true;
+      attach-modal-dialogs = false;
+      experimental-features = [ "scale-monitor-framebuffer" ];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -33,8 +36,16 @@
 
     # Shell: Dock Favorites
     "org/gnome/shell" = {
+      disable-user-extensions = false;
+
+      enabled-extensions = with pkgs.gnomeExtensions; [
+        launch-new-instance.extensionUuid
+        status-icons.extensionUuid
+        uptime-kuma-indicator.extensionUuid
+      ];
+
       favorite-apps = [
-        "firefox.desktop"
+        "firefox-devedition.desktop"
         "org.gnome.Console.desktop"
         "org.gnome.Nautilus.desktop"
         "org.gnome.Settings.desktop"
@@ -47,6 +58,46 @@
       show-line-numbers = true;
       highlight-current-line = true;
     };
+
+    "org/gnome/desktop/background" = {
+      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
+      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-d.svg";
+      primary-color = "#241f31";
+    };
+
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
+      primary-color = "#241f31";
+    };
+
+    "org/gnome/desktop/input-sources" = {
+      sources = [
+        (lib.gvariant.mkTuple [
+          "xkb"
+          "de+nodeadkeys"
+        ])
+      ];
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal/"
+      ];
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal" = {
+      name = "Terminal";
+      binding = "<Shift><Alt>t";
+      command = "kgx";
+    };
+
+    "org/gnome/desktop/wm/keybindings" = {
+      switch-applications = [ ];
+      switch-applications-backward = [ ];
+      switch-windows = [ "<Alt>Tab" ];
+      switch-windows-backward = [ "<Shift><Alt>Tab" ];
+    };
+
   };
 
   # ---------------------------------------------------------
@@ -87,12 +138,19 @@
 
     # Miscellaneous
     git
+    nixfmt-rfc-style
+
+    # Gnome Extensions
+    gnomeExtensions.launch-new-instance
+    gnomeExtensions.status-icons
+    gnomeExtensions.uptime-kuma-indicator
   ];
 
   home.sessionVariables = {
     EDITOR = "micro";
     # Point nh to your flake location so it works automatically
     FLAKE = "/etc/nixos";
+    NIXOS_OZONE_WL = "1";
   };
 
   # ---------------------------------------------------------
@@ -105,6 +163,8 @@
     syntaxHighlighting.enable = true;
 
     initContent = ''
+      WORDCHARS=''${WORDCHARS//[\/.-=]/}
+
       bindkey "^[[1;5C" forward-word
       bindkey "^[[1;5D" backward-word
     '';
@@ -119,7 +179,6 @@
 
     history = {
       size = 100000;
-      ignoreAllDups = true;
       path = "$HOME/.zsh_history";
     };
   };
@@ -135,10 +194,15 @@
 
   programs.git = {
     enable = true;
-    userName = "Patrick Hein";
-    userEmail = "bagbag98@googlemail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Patrick Hein";
+      user.email = "bagbag98@googlemail.com";
       init.defaultBranch = "main";
     };
+  };
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
   };
 }

@@ -4,10 +4,6 @@
   ...
 }:
 {
-  imports = [
-    inputs.userborn.nixosModules.userborn
-  ];
-
   services.userborn.enable = true;
   users.mutableUsers = false;
 
@@ -16,6 +12,7 @@
     shell = pkgs.zsh;
     initialPassword = "changeMeNow";
     extraGroups = [
+      "wheel"
       "networkmanager"
       "video"
       "audio"

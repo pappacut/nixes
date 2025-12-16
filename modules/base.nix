@@ -18,11 +18,14 @@
   boot.loader.systemd-boot = {
     enable = true;
     configurationLimit = 10;
+    consoleMode = "max";
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   system.nixos-init.enable = true;
+  boot.initrd.systemd.enable = true;
+  system.etc.overlay.enable = true;
 
   # ---------------------------------------------------------
   # Memory Management
@@ -43,7 +46,8 @@
 
   console = {
     keyMap = "de-latin1-nodeadkeys";
-    font = "Lat2-Terminus16";
+    packages = [ pkgs.terminus_font ];
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-v24b.psf.gz";
   };
 
   # ---------------------------------------------------------

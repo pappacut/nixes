@@ -38,12 +38,12 @@
 
       flake = {
         nixosConfigurations = {
-          arch-home = inputs.nixpkgs.lib.nixosSystem {
+          nixstation = inputs.nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = { inherit inputs; };
             modules = [
               # Host Specific Configuration
-              ./hosts/arch-home/host.nix
+              ./hosts/nixstation/host.nix
 
               # Core System Bundle
               ./modules/common.nix

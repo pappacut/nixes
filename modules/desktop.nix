@@ -43,7 +43,7 @@
   # ---------------------------------------------------------
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols
@@ -65,7 +65,12 @@
   };
 
   # Add Firefox as a fallback system browser
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox-devedition;
+  };
+
+  programs.thunderbird.enable = true;
 
   # Auto-login configuration
   services.displayManager.autoLogin.enable = true;
@@ -82,5 +87,9 @@
 
   environment.systemPackages = with pkgs; [
     gnome-tweaks
+    easyeffects
+
+    # GUI Applications
+    keepassxc
   ];
 }
