@@ -23,11 +23,15 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  system.nixos-init.enable = true;
   boot.initrd.systemd.enable = true;
-  system.etc.overlay.enable = true;
 
-  boot.tmp.useTmpfs = true;
+  # system.nixos-init.enable = true;
+  # system.etc.overlay.enable = true;
+
+  boot.tmp = {
+    useTmpfs = true;
+    tmpfsHugeMemoryPages = "within_size";
+  };
 
   # ---------------------------------------------------------
   # Memory Management
