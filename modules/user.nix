@@ -4,19 +4,23 @@
   ...
 }:
 {
-  services.userborn.enable = true;
-  users.mutableUsers = false;
+  # services.userborn.enable = true;
+
+  users.mutableUsers = true;
 
   users.users.patrick = {
     isNormalUser = true;
     shell = pkgs.zsh;
     initialPassword = "changeMeNow";
+
     extraGroups = [
       "wheel"
       "networkmanager"
       "video"
       "audio"
     ];
+
+    autoSubUidGidRange = true;
   };
 
   services.openssh.settings.AllowUsers = [ "patrick" ];
@@ -52,5 +56,5 @@
   };
 
   # Connect Home Manager Configuration
-  home-manager.users.patrick = import ./home.nix;
+  home-manager.users.patrick = import ./home/home.nix;
 }

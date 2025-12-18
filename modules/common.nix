@@ -9,6 +9,7 @@
     ./home-manager.nix
     ./network.nix
     ./nix.nix
+    ./podman.nix
     ./programs.nix
     ./system-packages.nix
   ];

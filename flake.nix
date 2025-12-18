@@ -14,6 +14,9 @@
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -53,6 +56,13 @@
 
               # User Configuration
               ./modules/user.nix
+
+              # VS Code Extensions Overlay
+              {
+                nixpkgs.overlays = [
+                  inputs.nix-vscode-extensions.overlays.default
+                ];
+              }
             ];
           };
         };

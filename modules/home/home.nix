@@ -7,6 +7,10 @@
 {
   home.stateVersion = "25.11";
 
+  imports = [
+    ./vscode.nix
+  ];
+
   # ---------------------------------------------------------
   # GNOME Desktop Configuration (Dconf)
   # ---------------------------------------------------------
@@ -217,10 +221,5 @@
       user.email = "bagbag98@googlemail.com";
       init.defaultBranch = "main";
     };
-  };
-
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscode.fhs;
   };
 }
