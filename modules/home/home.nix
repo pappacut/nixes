@@ -202,6 +202,29 @@
         controlPath = "~/.ssh/control-master-%r@%h:%p";
         controlPersist = "30";
       };
+
+      "nl01" = {
+        hostname = "10.98.0.100";
+        user = "root";
+        proxyJump = "root@pve01.nightlines.eu";
+      };
+
+      "s01.k-fin.de" = {
+        hostname = "10.38.7.100";
+        user = "root";
+        proxyJump = "root@pve02.cloud.kledig.de";
+      };
+
+      "s01.cloud.kledig.de" = {
+        hostname = "10.38.7.101";
+        user = "root";
+        proxyJump = "root@pve02.cloud.kledig.de";
+      };
+
+      "gateway01.nightlines.eu" = {
+        hostname = "217.160.18.89";
+        user = "root";
+      };
     };
   };
 
@@ -220,6 +243,38 @@
       user.name = "Patrick Hein";
       user.email = "bagbag98@googlemail.com";
       init.defaultBranch = "main";
+    };
+  };
+
+  programs.chromium = {
+    enable = true;
+    package = pkgs.ungoogled-chromium;
+
+    extensions = [
+      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # uBlock Origin
+      { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # Privacy Badger
+    ];
+  };
+
+  programs.mpv = {
+    enable = true;
+
+    package = (
+      pkgs.mpv-unwrapped.wrapper {
+        scripts = with pkgs.mpvScripts; [
+          uosc
+        ];
+
+        mpv = pkgs.mpv-unwrapped.override {
+          waylandSupport = true;
+        };
+      }
+    );
+
+    config = {
+      profile = "high-quality";
+      ytdl-format = "bestvideo+bestaudio";
+      cache-default = 4000000;
     };
   };
 }
