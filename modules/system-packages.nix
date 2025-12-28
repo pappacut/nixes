@@ -14,5 +14,6 @@
 
     # Other Software
     gimp
+    remmina
   ];
 }

@@ -2,6 +2,7 @@
   inputs,
   lib,
   pkgs,
+  config,
   ...
 }:
 {
@@ -11,10 +12,19 @@
     ./vscode.nix
   ];
 
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.node_modules/bin"
+  ];
+
   # ---------------------------------------------------------
   # GNOME Desktop Configuration (Dconf)
   # ---------------------------------------------------------
   dconf.settings = {
+    "/org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-type = "nothing";
+      power-button-action = "interactive";
+    };
+
     # Interface: Dark Theme & Clock
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
@@ -22,8 +32,8 @@
       clock-show-seconds = true;
       show-battery-percentage = true;
       enable-hot-corners = false;
-      font-name = "Noto Sans 11";
-      monospace-font-name = "Noto Sans Mono 11";
+      font-name = "Noto Sans 12";
+      monospace-font-name = "Noto Sans Mono 12";
     };
 
     # Window Management
@@ -92,7 +102,7 @@
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/terminal" = {
       name = "Terminal";
       binding = "<Shift><Alt>t";
-      command = "kgx";
+      command = "ghostty";
     };
 
     "org/gnome/desktop/wm/keybindings" = {
@@ -147,6 +157,7 @@
     git
     nixfmt-rfc-style
     code2prompt
+    aria2
 
     # Gnome Extensions
     gnomeExtensions.launch-new-instance
@@ -158,6 +169,16 @@
     EDITOR = "micro";
     NH_FLAKE = "/etc/nixos";
     NIXOS_OZONE_WL = "1";
+  };
+
+  # ---------------------------------------------------------
+  # Terminal Configuration
+  # ---------------------------------------------------------
+
+  programs.ghostty = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
   };
 
   # ---------------------------------------------------------
