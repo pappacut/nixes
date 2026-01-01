@@ -189,6 +189,10 @@
       window-padding-y = 4;
       mouse-hide-while-typing = true;
       scrollback-limit = 100000000;
+      shell-integration-features = [
+        "ssh-env"
+        "ssh-terminfo"
+      ];
     };
   };
 
