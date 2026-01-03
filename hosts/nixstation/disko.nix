@@ -57,4 +57,26 @@
       };
     };
   };
+
+  services.btrbk.instances.system = {
+    onCalendar = "*:0/15";
+
+    settings = {
+      incremental = "no";
+      snapshot_create = "always";
+      snapshot_preserve = "14d";
+      snapshot_preserve_min = "2d";
+
+      volume = {
+        "/mnt/btrfs-roots/main" = {
+          snapshot_dir = "@snapshots";
+          subvolume = {
+            "@root" = { };
+            "@home" = { };
+            "@var" = { };
+          };
+        };
+      };
+    };
+  };
 }

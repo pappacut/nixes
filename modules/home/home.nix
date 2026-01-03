@@ -119,7 +119,6 @@
   # ---------------------------------------------------------
   home.packages = with pkgs; [
     # System Helpers
-    nh
     nix-du
     nix-tree
 
@@ -154,10 +153,13 @@
     nmon
 
     # Miscellaneous
-    git
-    nixfmt-rfc-style
-    code2prompt
     aria2
+    awscli2
+    code2prompt
+    git
+    libpst
+    nixfmt-rfc-style
+    terraform
 
     # Gnome Extensions
     gnomeExtensions.launch-new-instance
@@ -167,7 +169,6 @@
 
   home.sessionVariables = {
     EDITOR = "micro";
-    NH_FLAKE = "/etc/nixos";
     NIXOS_OZONE_WL = "1";
   };
 

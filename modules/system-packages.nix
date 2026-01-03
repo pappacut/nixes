@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    nh
+    deploy-rs
     e2fsprogs
 
     # Runtimes
