@@ -11,6 +11,8 @@
     # Development Tools
     podman-compose
     dbeaver-bin
+    rustup
+    gcc
 
     # Other Software
     ffmpeg
