@@ -74,7 +74,7 @@
 
   # Auto-login configuration
   services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "patrick";
+  services.displayManager.autoLogin.user = "p0v0";
 
   security.pam.services.gdm-password.enableGnomeKeyring = true;
 

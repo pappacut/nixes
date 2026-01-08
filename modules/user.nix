@@ -8,7 +8,7 @@
 
   users.mutableUsers = true;
 
-  users.users.patrick = {
+  users.users.p0v0 = {
     isNormalUser = true;
     shell = pkgs.zsh;
     initialPassword = "changeMeNow";
@@ -23,18 +23,18 @@
     autoSubUidGidRange = true;
   };
 
-  services.openssh.settings.AllowUsers = [ "patrick" ];
+  services.openssh.settings.AllowUsers = [ "p0v0" ];
 
   security.doas.extraRules = [
     {
-      users = [ "patrick" ];
+      users = [ "p0v0" ];
       noPass = true;
     }
   ];
 
   security.sudo.extraRules = [
     {
-      users = [ "patrick" ];
+      users = [ "p0v0" ];
       commands = [
         {
           command = "ALL";
@@ -45,7 +45,7 @@
   ];
 
   # Workaround for https://github.com/nix-community/home-manager/issues/322
-  systemd.services.home-manager-patrick = {
+  systemd.services.home-manager-p0v0 = {
     preStart = ''
       rm -f "$HOME/.ssh/config"
     '';
@@ -56,5 +56,5 @@
   };
 
   # Connect Home Manager Configuration
-  home-manager.users.patrick = import ./home/home.nix;
+  home-manager.users.p0v0 = import ./home/home.nix;
 }

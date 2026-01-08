@@ -1,6 +1,6 @@
 {
   services.syncthing = {
-    enable = true;
+    enable = false;
     openDefaultPorts = true;
     user = "patrick";
 
@@ -8,18 +8,18 @@
       devices = {
         "pixel10" = {
           name = "Pixel 10 Pro XL";
-          id = "LFANBT3-MUYNDTL-LZEBKEE-Y7RLJY6-D3ACPXY-73TVXN2-SARNRPW-CKODLQL";
+          id = "";
         };
       };
       folders = {
         "keepass" = {
-          id = "dizum-nfezd";
+          id = "";
           path = "/home/patrick/syncthing/keepass";
           devices = [ "pixel10" ];
         };
 
         "keepass-work" = {
-          id = "jqqq6-c9zap";
+          id = "";
           path = "/home/patrick/syncthing/keepass-work";
           devices = [ "pixel10" ];
         };

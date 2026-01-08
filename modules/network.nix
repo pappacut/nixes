@@ -7,5 +7,5 @@
     ];
   };
 
-  users.users.patrick.extraGroups = [ "networkmanager" ];
+  users.users.p0v0.extraGroups = [ "networkmanager" ];
 }

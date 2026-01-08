@@ -1,7 +1,7 @@
 {
   nix.settings.trusted-users = [
     "root"
-    "patrick"
+    "p0v0"
   ];
 
   programs.nh = {
