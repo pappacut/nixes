@@ -155,10 +155,10 @@
     # Miscellaneous
     aria2
     awscli2
-    code2prompt
     git
     libpst
     nixfmt-rfc-style
+    repomix
     terraform
 
     # Gnome Extensions
