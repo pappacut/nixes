@@ -22,5 +22,6 @@
     signal-desktop
     transmission_4-gtk
     rustdesk-flutter
+    google-chrome
   ];
 }

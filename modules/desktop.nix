@@ -88,6 +88,7 @@
   environment.systemPackages = with pkgs; [
     gnome-tweaks
     easyeffects
+    nfs-utils
 
     # GUI Applications
     keepassxc

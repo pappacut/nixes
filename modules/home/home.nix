@@ -63,6 +63,8 @@
         "org.gnome.Console.desktop"
         "org.gnome.Nautilus.desktop"
         "org.gnome.Settings.desktop"
+        "chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop"
+        "google-chrome.desktop"
       ];
     };
 

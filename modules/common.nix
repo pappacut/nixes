@@ -7,6 +7,7 @@
     ./base.nix
     ./firewall.nix
     ./home-manager.nix
+    ./mounts.nix
     ./network.nix
     ./nix.nix
     ./podman.nix
